@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "5O7rQrTRAVTDzV3qm8CweJ8lW15cSKe6SUmltDtCkxI=",
+  "Source": "ControlePedidosAPI",
+  "BasePath": "_content/ControlePedidosAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

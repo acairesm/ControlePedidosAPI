@@ -482,19 +482,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\andre\\.nuget\\packages\\": {}
+    "/Users/pedrozo/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\andre\\Documents\\GitHub\\ControlePedidosAPI\\ControlePedidosAPI\\ControlePedidosAPI.csproj",
+      "projectUniqueName": "/Users/pedrozo/Documents/GitHub/ControlePedidosAPI/ControlePedidosAPI/ControlePedidosAPI.csproj",
       "projectName": "ControlePedidosAPI",
-      "projectPath": "C:\\Users\\andre\\Documents\\GitHub\\ControlePedidosAPI\\ControlePedidosAPI\\ControlePedidosAPI.csproj",
-      "packagesPath": "C:\\Users\\andre\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\andre\\Documents\\GitHub\\ControlePedidosAPI\\ControlePedidosAPI\\obj\\",
+      "projectPath": "/Users/pedrozo/Documents/GitHub/ControlePedidosAPI/ControlePedidosAPI/ControlePedidosAPI.csproj",
+      "packagesPath": "/Users/pedrozo/.nuget/packages/",
+      "outputPath": "/Users/pedrozo/Documents/GitHub/ControlePedidosAPI/ControlePedidosAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\andre\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/pedrozo/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -517,7 +517,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -543,6 +544,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.24, 8.0.24]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.osx-arm64",
+            "version": "[8.0.24, 8.0.24]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.24, 8.0.24]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -551,7 +566,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

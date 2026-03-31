@@ -4,72 +4,100 @@ using ControlePedidosAPI.Repository;
 
 namespace ControlePedidosAPI.Controllers
 {
+    // Esse controller gerencia os pedidos feitos pelos clientes
     [ApiController]
     [Route("api/pedido")]
     public class PedidoController : ControllerBase
     {
-        private readonly IPedidoRepository _repository;
+        // Repositório injetado pelo ASP.NET para acessar o banco de dados
+        private readonly IPedidoRepository _pedidoRepository;
 
-        public PedidoController(IPedidoRepository repository)
+        // Construtor: recebe o repositório por injeção de dependência
+        public PedidoController(IPedidoRepository pedidoRepository)
         {
-            _repository = repository;
+            _pedidoRepository = pedidoRepository;
         }
 
+        // GET api/pedido
+        // Retorna todos os pedidos cadastrados, incluindo os itens de cada um
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> ListarTodos()
         {
-            var pedidos = await _repository.GetAllAsync();
+            var pedidos = await _pedidoRepository.GetAllAsync();
             return Ok(pedidos);
         }
 
+        // GET api/pedido/{id}
+        // Busca um pedido específico pelo ID
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> BuscarPorId(int id)
         {
-            var pedido = await _repository.GetByIdAsync(id);
+            var pedido = await _pedidoRepository.GetByIdAsync(id);
+
             if (pedido == null)
                 return NotFound(new { mensagem = "Pedido não encontrado." });
 
             return Ok(pedido);
         }
 
+        // GET api/pedido/{id}/total
+        // Endpoint extra: retorna o valor total calculado do pedido
+        // O total é a soma de (quantidade * preço unitário) de cada item
         [HttpGet("{id}/total")]
-        public async Task<IActionResult> GetTotal(int id)
+        public async Task<IActionResult> BuscarTotal(int id)
         {
-            var pedido = await _repository.GetByIdAsync(id);
+            // Primeiro verifica se o pedido existe antes de calcular
+            var pedido = await _pedidoRepository.GetByIdAsync(id);
+
             if (pedido == null)
                 return NotFound(new { mensagem = "Pedido não encontrado." });
 
-            var total = await _repository.GetTotalAsync(id);
-            return Ok(new { total });
+            var total = await _pedidoRepository.GetTotalAsync(id);
+
+            // Retorna um objeto com o id e o total para ficar mais claro na resposta
+            return Ok(new { pedidoId = id, total });
         }
 
+        // POST api/pedido
+        // Cria um novo pedido — valida nome do cliente e a presença de itens
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Pedido pedido)
+        public async Task<IActionResult> Criar([FromBody] Pedido pedido)
         {
+            // Não faz sentido um pedido sem saber quem está pedindo
             if (string.IsNullOrWhiteSpace(pedido.ClienteNome))
                 return BadRequest(new { mensagem = "O nome do cliente é obrigatório." });
 
+            // Um pedido sem itens não tem utilidade
             if (pedido.Itens == null || pedido.Itens.Count == 0)
-                return BadRequest(new { mensagem = "O pedido deve conter ao menos um item." });
+                return BadRequest(new { mensagem = "O pedido deve ter pelo menos um item." });
 
-            var criado = await _repository.CreateAsync(pedido);
-            return CreatedAtAction(nameof(GetById), new { id = criado.Id }, criado);
+            var pedidoCriado = await _pedidoRepository.CreateAsync(pedido);
+
+            // Retorna 201 Created com o caminho para acessar o pedido criado
+            return CreatedAtAction(nameof(BuscarPorId), new { id = pedidoCriado.Id }, pedidoCriado);
         }
 
+        // PATCH api/pedido/{id}/status
+        // Atualiza apenas o status do pedido (ex: Pendente → Pago → Enviado)
+        // Usamos PATCH porque estamos alterando só um campo, não o pedido inteiro
         [HttpPatch("{id}/status")]
-        public async Task<IActionResult> UpdateStatus(int id, [FromBody] StatusPedido status)
+        public async Task<IActionResult> AtualizarStatus(int id, [FromBody] StatusPedido status)
         {
-            var atualizado = await _repository.UpdateStatusAsync(id, status);
-            if (atualizado == null)
+            var pedidoAtualizado = await _pedidoRepository.UpdateStatusAsync(id, status);
+
+            if (pedidoAtualizado == null)
                 return NotFound(new { mensagem = "Pedido não encontrado." });
 
-            return Ok(atualizado);
+            return Ok(pedidoAtualizado);
         }
 
+        // DELETE api/pedido/{id}
+        // Remove um pedido do sistema
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Remover(int id)
         {
-            var removido = await _repository.DeleteAsync(id);
+            var removido = await _pedidoRepository.DeleteAsync(id);
+
             if (!removido)
                 return NotFound(new { mensagem = "Pedido não encontrado." });
 

@@ -2,13 +2,14 @@ using ControlePedidosAPI.Models;
 
 namespace ControlePedidosAPI.Repository
 {
+    // Interface do repositório de pedidos — define os métodos de acesso ao banco
     public interface IPedidoRepository
     {
-        Task<IEnumerable<Pedido>> GetAllAsync();
-        Task<Pedido?> GetByIdAsync(int id);
-        Task<decimal> GetTotalAsync(int id);
-        Task<Pedido> CreateAsync(Pedido pedido);
-        Task<Pedido?> UpdateStatusAsync(int id, StatusPedido status);
-        Task<bool> DeleteAsync(int id);
+        IEnumerable<Pedido> GetAll();
+        Pedido? GetById(int id);
+        decimal GetTotal(int id);
+        Pedido Create(Pedido pedido);
+        Pedido? UpdateStatus(int id, StatusPedido status);
+        bool Delete(int id);
     }
 }

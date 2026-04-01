@@ -21,18 +21,18 @@ namespace ControlePedidosAPI.Controllers
         // GET api/pizza
         // Retorna a lista com todas as pizzas cadastradas no banco
         [HttpGet]
-        public async Task<IActionResult> ListarTodas()
+        public IActionResult ListarTodas()
         {
-            var pizzas = await _pizzaRepository.GetAllAsync();
+            var pizzas = _pizzaRepository.GetAll();
             return Ok(pizzas);
         }
 
         // GET api/pizza/{id}
         // Busca uma pizza pelo ID — se não existir, retorna 404
         [HttpGet("{id}")]
-        public async Task<IActionResult> BuscarPorId(int id)
+        public IActionResult BuscarPorId(int id)
         {
-            var pizza = await _pizzaRepository.GetByIdAsync(id);
+            var pizza = _pizzaRepository.GetById(id);
 
             if (pizza == null)
                 return NotFound(new { mensagem = "Pizza não encontrada." });
@@ -43,16 +43,16 @@ namespace ControlePedidosAPI.Controllers
         // GET api/pizza/disponiveis
         // Retorna apenas as pizzas com Disponivel = true
         [HttpGet("disponiveis")]
-        public async Task<IActionResult> ListarDisponiveis()
+        public IActionResult ListarDisponiveis()
         {
-            var pizzas = await _pizzaRepository.GetDisponiveisAsync();
+            var pizzas = _pizzaRepository.GetDisponiveis();
             return Ok(pizzas);
         }
 
         // POST api/pizza
         // Cadastra uma nova pizza — valida nome e preço antes de salvar
         [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] Pizza pizza)
+        public IActionResult Criar([FromBody] Pizza pizza)
         {
             // Valida se o nome foi informado
             if (string.IsNullOrWhiteSpace(pizza.Nome))
@@ -62,7 +62,7 @@ namespace ControlePedidosAPI.Controllers
             if (pizza.Preco <= 0)
                 return BadRequest(new { mensagem = "O preço deve ser maior que zero." });
 
-            var pizzaCriada = await _pizzaRepository.CreateAsync(pizza);
+            var pizzaCriada = _pizzaRepository.Create(pizza);
 
             // Retorna 201 Created com o endereço do novo recurso no cabeçalho
             return CreatedAtAction(nameof(BuscarPorId), new { id = pizzaCriada.Id }, pizzaCriada);
@@ -71,7 +71,7 @@ namespace ControlePedidosAPI.Controllers
         // PUT api/pizza/{id}
         // Atualiza todos os dados de uma pizza existente
         [HttpPut("{id}")]
-        public async Task<IActionResult> Atualizar(int id, [FromBody] Pizza pizza)
+        public IActionResult Atualizar(int id, [FromBody] Pizza pizza)
         {
             // Mesmas validações do cadastro
             if (string.IsNullOrWhiteSpace(pizza.Nome))
@@ -80,7 +80,7 @@ namespace ControlePedidosAPI.Controllers
             if (pizza.Preco <= 0)
                 return BadRequest(new { mensagem = "O preço deve ser maior que zero." });
 
-            var pizzaAtualizada = await _pizzaRepository.UpdateAsync(id, pizza);
+            var pizzaAtualizada = _pizzaRepository.Update(id, pizza);
 
             // Se o repositório retornou null, é porque o ID não existe
             if (pizzaAtualizada == null)
@@ -92,9 +92,9 @@ namespace ControlePedidosAPI.Controllers
         // DELETE api/pizza/{id}
         // Remove uma pizza do cardápio
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Remover(int id)
+        public IActionResult Remover(int id)
         {
-            var removida = await _pizzaRepository.DeleteAsync(id);
+            var removida = _pizzaRepository.Delete(id);
 
             if (!removida)
                 return NotFound(new { mensagem = "Pizza não encontrada." });

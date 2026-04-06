@@ -1723,19 +1723,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Aslem\\.nuget\\packages\\": {}
+    "/Users/pedrozo/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aslem\\Desktop\\trabalho github desktop\\ControlePedidosAPI\\ControlePedidosAPI\\ControlePedidosAPI.csproj",
+      "projectUniqueName": "/Users/pedrozo/Documents/GitHub/ControlePedidosAPI/ControlePedidosAPI/ControlePedidosAPI.csproj",
       "projectName": "ControlePedidosAPI",
-      "projectPath": "C:\\Users\\Aslem\\Desktop\\trabalho github desktop\\ControlePedidosAPI\\ControlePedidosAPI\\ControlePedidosAPI.csproj",
-      "packagesPath": "C:\\Users\\Aslem\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aslem\\Desktop\\trabalho github desktop\\ControlePedidosAPI\\ControlePedidosAPI\\obj\\",
+      "projectPath": "/Users/pedrozo/Documents/GitHub/ControlePedidosAPI/ControlePedidosAPI/ControlePedidosAPI.csproj",
+      "packagesPath": "/Users/pedrozo/.nuget/packages/",
+      "outputPath": "/Users/pedrozo/Documents/GitHub/ControlePedidosAPI/ControlePedidosAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Aslem\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/pedrozo/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -1753,7 +1753,13 @@
         "warnAsError": [
           "NU1605"
         ]
-      }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net7.0": {
@@ -1795,7 +1801,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.103/RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,0 +1,32 @@
+## Saidas de compilacao
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+## Arquivos do Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.cache
+
+## Banco de dados SQLite (gerado em tempo de execucao)
+*.db
+*.db-shm
+*.db-wal
+
+## Configuracoes de desenvolvimento (podem conter dados sensiveis)
+appsettings.Development.json
+
+## Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+## Arquivos NuGet
+*.nupkg
+**/packages/*
+
+## Arquivos de publicacao
+*.publish.xml

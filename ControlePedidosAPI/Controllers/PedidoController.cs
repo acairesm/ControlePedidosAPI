@@ -83,6 +83,10 @@ namespace ControlePedidosAPI.Controllers
         [HttpPatch("{id}/status")]
         public IActionResult AtualizarStatus(int id, [FromBody] StatusPedido status)
         {
+            // Valida se o valor recebido é um status válido do enum
+            if (!Enum.IsDefined(typeof(StatusPedido), status))
+                return BadRequest(new { mensagem = "Status inválido." });
+
             var pedidoAtualizado = _pedidoRepository.UpdateStatus(id, status);
 
             if (pedidoAtualizado == null)

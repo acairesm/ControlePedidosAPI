@@ -23,10 +23,10 @@ namespace ControlePedidosAPI.Models
         public bool Disponivel { get; set; } = true;
 
         // Chave estrangeira para a categoria
-        [ForeignKey("Category")]
-        public int CategoryId { get; set; }
+        [ForeignKey("Categoria")]
+        public int CategoriaId { get; set; }
 
         // Propriedade de navegação — referência à categoria da pizza
-        public Category? Category { get; set; }
+        public Categoria? Categoria { get; set; }
     }
 }

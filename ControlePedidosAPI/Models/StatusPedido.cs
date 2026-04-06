@@ -1,12 +1,11 @@
 namespace ControlePedidosAPI.Models
 {
-  public enum StatusPedido
+    // Enum que representa os possíveis estados de um pedido no sistema
+    public enum StatusPedido
     {
-        Pendente,
-        Pago,
-        Enviado,
-        Cancelado
+        Pendente,   // Pedido criado, aguardando pagamento
+        Pago,       // Pagamento confirmado
+        Enviado,    // Pedido saiu para entrega
+        Cancelado   // Pedido cancelado pelo cliente ou sistema
     }
-
-
 }

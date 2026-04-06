@@ -19,19 +19,19 @@ namespace ControlePedidosAPI.Repository
         // Retorna todas as pizzas do banco, incluindo a categoria de cada uma
         public IEnumerable<Pizza> GetAll()
         {
-            return _context.Pizzas.Include(p => p.Category).ToList();
+            return _context.Pizzas.Include(p => p.Categoria).ToList();
         }
 
         // Busca uma pizza pelo ID, incluindo a categoria
         public Pizza? GetById(int id)
         {
-            return _context.Pizzas.Include(p => p.Category).FirstOrDefault(p => p.Id == id);
+            return _context.Pizzas.Include(p => p.Categoria).FirstOrDefault(p => p.Id == id);
         }
 
         // Retorna apenas as pizzas disponíveis no cardápio
         public IEnumerable<Pizza> GetDisponiveis()
         {
-            return _context.Pizzas.Include(p => p.Category).Where(p => p.Disponivel).ToList();
+            return _context.Pizzas.Include(p => p.Categoria).Where(p => p.Disponivel).ToList();
         }
 
         // Cadastra uma nova pizza no banco de dados
@@ -55,7 +55,7 @@ namespace ControlePedidosAPI.Repository
             pizzaExistente.Descricao = pizza.Descricao;
             pizzaExistente.Preco = pizza.Preco;
             pizzaExistente.Disponivel = pizza.Disponivel;
-            pizzaExistente.CategoryId = pizza.CategoryId;
+            pizzaExistente.CategoriaId = pizza.CategoriaId;
 
             _context.SaveChanges();
             return pizzaExistente;

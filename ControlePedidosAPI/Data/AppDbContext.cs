@@ -13,7 +13,7 @@ namespace ControlePedidosAPI.Data
         public DbSet<Pizza> Pizzas { get; set; }
 
         // Tabela de categorias no banco de dados
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
 
         // Tabela de pedidos no banco de dados
         public DbSet<Pedido> Pedidos { get; set; }
@@ -26,11 +26,11 @@ namespace ControlePedidosAPI.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuração do relacionamento: uma Category tem muitas Pizzas
-            modelBuilder.Entity<Category>()
+            // Configuração do relacionamento: uma Categoria tem muitas Pizzas
+            modelBuilder.Entity<Categoria>()
                 .HasMany(c => c.Pizzas)
-                .WithOne(p => p.Category)
-                .HasForeignKey(p => p.CategoryId);
+                .WithOne(p => p.Categoria)
+                .HasForeignKey(p => p.CategoriaId);
 
             // Configuração do relacionamento: um Pedido tem muitos ItensPedido
             modelBuilder.Entity<Pedido>()
@@ -39,10 +39,10 @@ namespace ControlePedidosAPI.Data
                 .HasForeignKey(i => i.PedidoId);
 
             // Seed de categorias — dados iniciais para o banco
-            modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Nome = "Tradicional" },
-                new Category { Id = 2, Nome = "Especial" },
-                new Category { Id = 3, Nome = "Doce" }
+            modelBuilder.Entity<Categoria>().HasData(
+                new Categoria { Id = 1, Nome = "Tradicional" },
+                new Categoria { Id = 2, Nome = "Especial" },
+                new Categoria { Id = 3, Nome = "Doce" }
             );
 
             // Seed de pizzas — dados iniciais para o banco
@@ -54,7 +54,7 @@ namespace ControlePedidosAPI.Data
                     Descricao = "Molho de tomate, mussarela e manjericão",
                     Preco = 35.00m,
                     Disponivel = true,
-                    CategoryId = 1
+                    CategoriaId = 1
                 },
                 new Pizza
                 {
@@ -63,7 +63,7 @@ namespace ControlePedidosAPI.Data
                     Descricao = "Calabresa fatiada, cebola e azeitona",
                     Preco = 38.00m,
                     Disponivel = true,
-                    CategoryId = 1
+                    CategoriaId = 1
                 },
                 new Pizza
                 {
@@ -72,7 +72,7 @@ namespace ControlePedidosAPI.Data
                     Descricao = "Mussarela, provolone, parmesão e gorgonzola",
                     Preco = 45.00m,
                     Disponivel = true,
-                    CategoryId = 2
+                    CategoriaId = 2
                 },
                 new Pizza
                 {
@@ -81,7 +81,7 @@ namespace ControlePedidosAPI.Data
                     Descricao = "Frango desfiado com catupiry cremoso",
                     Preco = 42.00m,
                     Disponivel = true,
-                    CategoryId = 2
+                    CategoriaId = 2
                 },
                 new Pizza
                 {
@@ -90,7 +90,7 @@ namespace ControlePedidosAPI.Data
                     Descricao = "Chocolate ao leite com morangos frescos",
                     Preco = 40.00m,
                     Disponivel = true,
-                    CategoryId = 3
+                    CategoriaId = 3
                 }
             );
         }

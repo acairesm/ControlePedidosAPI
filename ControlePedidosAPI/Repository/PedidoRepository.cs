@@ -53,7 +53,7 @@ namespace ControlePedidosAPI.Repository
         // Atualiza apenas o status de um pedido existente
         public Pedido? UpdateStatus(int id, StatusPedido status)
         {
-            var pedido = _context.Pedidos.Find(id);
+            var pedido = _context.Pedidos.Include(p => p.Itens).FirstOrDefault(p => p.Id == id);
 
             if (pedido == null)
                 return null;

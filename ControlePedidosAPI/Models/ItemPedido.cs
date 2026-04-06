@@ -10,18 +10,19 @@ namespace ControlePedidosAPI.Models
         [Required]
         public string ProdutoNome { get; set; } = string.Empty;
 
+        // A quantidade deve ser no mínimo 1
         [Range(1, int.MaxValue, ErrorMessage = "A quantidade deve ser maior que 0.")]
-        // Valida para que a quantidade seja maior que 0
         public int Quantidade { get; set; }
 
+        // O preço unitário deve ser no mínimo R$ 0,01
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço unitário deve ser maior que 0.")]
-        // Valida para que a quantidade seja maior que 0.1 centavos
         public decimal PrecoUnitario { get; set; }
 
+        // Chave estrangeira — cada item pertence a um pedido
         [ForeignKey("Pedido")]
-        // Relaciona este campo com a tabela/classe Pedido
         public int PedidoId { get; set; }
 
+        // Propriedade de navegação para o pedido
         public Pedido? Pedido { get; set; }
     }
 }

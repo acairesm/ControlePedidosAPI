@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ControlePedidosAPI.Models
 {
@@ -12,6 +13,8 @@ namespace ControlePedidosAPI.Models
         public string Nome { get; set; } = string.Empty;
 
         // Lista de pizzas que pertencem a esta categoria
+        // JsonIgnore evita que a lista de pizzas apareça dentro da categoria no JSON
+        [JsonIgnore]
         public List<Pizza> Pizzas { get; set; } = new List<Pizza>();
     }
 }

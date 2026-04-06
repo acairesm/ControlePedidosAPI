@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ControlePedidosAPI.Models
 {
@@ -23,6 +24,8 @@ namespace ControlePedidosAPI.Models
         public int PedidoId { get; set; }
 
         // Propriedade de navegação para o pedido
+        // JsonIgnore evita que o pedido inteiro apareça dentro de cada item no JSON
+        [JsonIgnore]
         public Pedido? Pedido { get; set; }
     }
 }

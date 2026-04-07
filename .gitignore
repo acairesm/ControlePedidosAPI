@@ -30,3 +30,5 @@ Thumbs.db
 
 ## Arquivos de publicacao
 *.publish.xml
+
+.fake

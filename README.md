@@ -82,12 +82,27 @@ ControlePedidosAPI/
 | PUT | `/api/pizza/{id}` | Atualiza os dados de uma pizza |
 | DELETE | `/api/pizza/{id}` | Remove uma pizza do cardápio |
 
-**Exemplo de body para POST/PUT `/api/pizza`:**
+**Exemplo de body para POST `/api/pizza`:**
+
+O `id` **não deve ser enviado** — o banco gera automaticamente.
 ```json
 {
   "nome": "Portuguesa",
   "descricao": "Presunto, ovo, cebola, azeitona e mussarela",
   "preco": 40.00,
+  "disponivel": true,
+  "categoriaId": 1
+}
+```
+
+**Exemplo de body para PUT `/api/pizza/{id}`:**
+
+O `id` vai na **URL**, não no body.
+```json
+{
+  "nome": "Portuguesa",
+  "descricao": "Presunto, ovo, cebola, azeitona e mussarela",
+  "preco": 42.00,
   "disponivel": true,
   "categoriaId": 1
 }
@@ -105,19 +120,36 @@ ControlePedidosAPI/
 | DELETE | `/api/pedido/{id}` | Remove um pedido |
 
 **Exemplo de body para POST `/api/pedido`:**
+
+Você só precisa informar o `pizzaId` e a `quantidade`. O nome e o preço são preenchidos automaticamente com base no cadastro da pizza.
 ```json
 {
   "clienteNome": "João Silva",
   "itens": [
     {
-      "produtoNome": "Margherita",
-      "quantidade": 2,
-      "precoUnitario": 35.00
+      "pizzaId": 1,
+      "quantidade": 2
     },
     {
-      "produtoNome": "Quatro Queijos",
-      "quantidade": 1,
-      "precoUnitario": 45.00
+      "pizzaId": 3,
+      "quantidade": 1
+    }
+  ]
+}
+```
+
+> `produtoNome` e `precoUnitario` **não precisam ser enviados** — a API busca esses valores automaticamente pelo `pizzaId`.
+
+Se quiser sobrescrever manualmente (não recomendado), pode enviar com todos os campos:
+```json
+{
+  "clienteNome": "João Silva",
+  "itens": [
+    {
+      "pizzaId": 1,
+      "quantidade": 2,
+      "produtoNome": "Margherita",
+      "precoUnitario": 35.00
     }
   ]
 }

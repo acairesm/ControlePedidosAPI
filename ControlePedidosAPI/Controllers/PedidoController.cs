@@ -71,10 +71,15 @@ namespace ControlePedidosAPI.Controllers
             if (pedido.Itens == null || pedido.Itens.Count == 0)
                 return BadRequest(new { mensagem = "O pedido deve ter pelo menos um item." });
 
-            var pedidoCriado = _pedidoRepository.Create(pedido);
-
-            // Retorna 201 Created com o caminho para acessar o pedido criado
-            return CreatedAtAction(nameof(BuscarPorId), new { id = pedidoCriado.Id }, pedidoCriado);
+            try
+            {
+                var pedidoCriado = _pedidoRepository.Create(pedido);
+                return CreatedAtAction(nameof(BuscarPorId), new { id = pedidoCriado!.Id }, pedidoCriado);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
         }
 
         // PATCH api/pedido/{id}/status

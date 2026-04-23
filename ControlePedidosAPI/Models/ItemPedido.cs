@@ -8,24 +8,29 @@ namespace ControlePedidosAPI.Models
     {
         public int Id { get; set; }
 
+        // Chave estrangeira para a pizza do cardápio
         [Required]
+        [ForeignKey("Pizza")]
+        public int PizzaId { get; set; }
+
+        // Preenchido automaticamente com o nome da pizza ao criar o pedido
         public string ProdutoNome { get; set; } = string.Empty;
 
         // A quantidade deve ser no mínimo 1
         [Range(1, int.MaxValue, ErrorMessage = "A quantidade deve ser maior que 0.")]
         public int Quantidade { get; set; }
 
-        // O preço unitário deve ser no mínimo R$ 0,01
-        [Range(0.01, double.MaxValue, ErrorMessage = "O preço unitário deve ser maior que 0.")]
+        // Preenchido automaticamente com o preço da pizza ao criar o pedido
         public decimal PrecoUnitario { get; set; }
 
         // Chave estrangeira — cada item pertence a um pedido
         [ForeignKey("Pedido")]
         public int PedidoId { get; set; }
 
-        // Propriedade de navegação para o pedido
-        // JsonIgnore evita que o pedido inteiro apareça dentro de cada item no JSON
         [JsonIgnore]
         public Pedido? Pedido { get; set; }
+
+        [JsonIgnore]
+        public Pizza? Pizza { get; set; }
     }
 }

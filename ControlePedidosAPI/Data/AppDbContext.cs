@@ -38,6 +38,12 @@ namespace ControlePedidosAPI.Data
                 .WithOne(i => i.Pedido)
                 .HasForeignKey(i => i.PedidoId);
 
+            // Configuração do relacionamento: uma Pizza pode aparecer em muitos ItensPedido
+            modelBuilder.Entity<Pizza>()
+                .HasMany<ItemPedido>()
+                .WithOne(i => i.Pizza)
+                .HasForeignKey(i => i.PizzaId);
+
             // Seed de categorias — dados iniciais para o banco
             modelBuilder.Entity<Categoria>().HasData(
                 new Categoria { Id = 1, Nome = "Tradicional" },

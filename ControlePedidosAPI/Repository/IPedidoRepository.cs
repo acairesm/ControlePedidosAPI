@@ -8,7 +8,7 @@ namespace ControlePedidosAPI.Repository
         IEnumerable<Pedido> GetAll();
         Pedido? GetById(int id);
         decimal GetTotal(int id);
-        Pedido Create(Pedido pedido);
+        Pedido? Create(Pedido pedido);
         Pedido? UpdateStatus(int id, StatusPedido status);
         bool Delete(int id);
     }

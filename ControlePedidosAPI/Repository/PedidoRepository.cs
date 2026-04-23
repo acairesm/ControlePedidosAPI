@@ -40,9 +40,20 @@ namespace ControlePedidosAPI.Repository
         }
 
         // Cria um novo pedido no banco de dados
-        public Pedido Create(Pedido pedido)
+        public Pedido? Create(Pedido pedido)
         {
-            // Calcula o total automaticamente com base nos itens
+            foreach (var item in pedido.Itens)
+            {
+                var pizza = _context.Pizzas.FirstOrDefault(p => p.Id == item.PizzaId)
+                    ?? throw new ArgumentException($"Pizza com Id {item.PizzaId} não encontrada.");
+
+                if (!pizza.Disponivel)
+                    throw new ArgumentException($"A pizza '{pizza.Nome}' não está disponível no momento.");
+
+                item.ProdutoNome = pizza.Nome;
+                item.PrecoUnitario = pizza.Preco;
+            }
+
             pedido.Total = pedido.Itens.Sum(i => i.Quantidade * i.PrecoUnitario);
 
             _context.Pedidos.Add(pedido);

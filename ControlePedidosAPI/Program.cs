@@ -24,11 +24,12 @@ builder.Services.AddScoped<IPedidoRepository, PedidoRepository>();
 
 var app = builder.Build();
 
-// Garante que o banco de dados SQLite seja criado automaticamente ao iniciar a aplicação
+// Aplica as migrations pendentes ao iniciar a aplicação — cria o banco se não existir
+// e atualiza o schema caso o modelo tenha mudado
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    context.Database.EnsureCreated();
+    context.Database.Migrate();
 }
 
 app.UseHttpsRedirection();

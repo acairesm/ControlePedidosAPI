@@ -15,9 +15,9 @@ namespace ControlePedidosAPI.Models
         // Descrição opcional da pizza (ingredientes, etc.)
         public string? Descricao { get; set; }
 
-        public decimal Preco { get; set; }
-        [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
         // Preço da pizza — deve ser maior que zero
+        [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
+        public decimal Preco { get; set; }
 
         // Indica se a pizza está disponível no cardápio
         public bool Disponivel { get; set; } = true;

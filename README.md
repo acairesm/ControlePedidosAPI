@@ -1,4 +1,4 @@
-﻿# ControlePedidosAPI
+# ControlePedidosAPI
 
 API para gerenciamento de pedidos de uma pizzaria. Permite cadastrar pizzas no cardápio, criar pedidos com itens e acompanhar o status de cada pedido.
 
@@ -9,7 +9,7 @@ API para gerenciamento de pedidos de uma pizzaria. Permite cadastrar pizzas no c
 | .NET | 10.0 |
 | ASP.NET Core Web API | 10.0 |
 | Entity Framework Core | 10.0.3 |
-| SQLite | via EF Core (`Microsoft.EntityFrameworkCore.Sqlite` 10.0.3) |
+| SQLite | via EF Core (`Microsoft.EntityFrameworkCore.Sqlite` 10.0.3|
 | C# | 13 |
 
 ## Como rodar o projeto
@@ -176,8 +176,8 @@ O projeto usa **SQLite** como banco de dados. O arquivo do banco é o `pizzeria.
 | Tabela | Descrição |
 |---|---|
 | `Pizzas` | Pizzas do cardápio (nome, descrição, preço, disponibilidade) |
-| `Categorias` | Categorias de pizza (Tradicional, Especial, Doce) |
-| `Pedidos` | Pedidos dos clientes (nome do cliente, data, status, total) |
+| `Categorias` | Categorias de pizza (Tradicional, Especial, Doce|
+| `Pedidos` | Pedidos dos clientes (nome do cliente, data, status, total|
 | `ItensPedido` | Itens de cada pedido (produto, quantidade, preço unitário) |
 
 ### Relacionamentos
